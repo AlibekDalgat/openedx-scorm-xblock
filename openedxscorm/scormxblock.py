@@ -55,15 +55,14 @@ OS_PATH_ALT_SEP = '\\'
 @XBlock.wants("settings")
 @XBlock.wants("user")
 class ScormXBlock(XBlock, CompletableXBlockMixin):
-
     display_name = String(
-        display_name=_("Display Name"),
-        help=_("Display name for this module"),
-        default="Scorm module",
+        display_name="Название",
+        help="Название для этого модуля",
+        default="Scorm-модуль",
         scope=Scope.settings,
     )
     index_page_path = String(
-        display_name=_("Path to the index page in scorm file"), scope=Scope.settings
+        display_name="Путь к индексной странице в файле SCORM", scope=Scope.settings
     )
     package_meta = Dict(scope=Scope.content)
     scorm_version = String(default="SCORM_12", scope=Scope.settings)
@@ -80,15 +79,13 @@ class ScormXBlock(XBlock, CompletableXBlockMixin):
     lesson_score = Float(scope=Scope.user_state, default=0)
     weight = Float(
         default=1,
-        display_name=_("Weight"),
-        help=_("Weight/Maximum grade"),
+        display_name="Вес",
+        help="Вес/Максимальная оценка",
         scope=Scope.settings,
     )
     has_score = Boolean(
-        display_name=_("Scored"),
-        help=_(
-            "Select False if this component will not receive a numerical score from the Scorm"
-        ),
+        display_name="Оцениваемый",
+        help="Выберите Ложь, если этот компонент не будет получать числовую оценку от SCORM",
         default=True,
         scope=Scope.settings,
     )
@@ -99,37 +96,31 @@ class ScormXBlock(XBlock, CompletableXBlockMixin):
 
     icon_class = String(default="video", scope=Scope.settings)
     width = Integer(
-        display_name=_("Display width (px)"),
-        help=_("Width of iframe (default: 100%)"),
+        display_name="Ширина отображения (пиксели)",
+        help="Ширина iframe (по умолчанию: 100%)",
         scope=Scope.settings,
     )
     height = Integer(
-        display_name=_("Display height (px)"),
-        help=_("Height of iframe"),
+        display_name="Высота отображения (пиксели)",
+        help="Высота iframe",
         default=450,
         scope=Scope.settings,
     )
     popup_on_launch = Boolean(
-        display_name=_("Launch in pop-up window"),
-        help=_(
-            "Launch in pop-up window instead of embedding the SCORM content in "
-            "an iframe. Enable this for older packages that need to be run in "
-            "separate window."
-        ),
+        display_name="Запуск в всплывающем окне",
+        help="Запуск в всплывающем окне вместо встраивания содержимого SCORM в iframe. Включите это для старых пакетов, которые требуют запуска в отдельном окне.",
         default=False,
         scope=Scope.settings,
     )
     enable_navigation_menu = Boolean(
-        display_name=_("Display navigation menu"),
-        help=_(
-            "Select True to display a navigation menu on the left side to display table of contents"
-        ),
+        display_name="Отобразить меню навигации",
+        help="Выберите Истина, чтобы отобразить меню навигации слева для показа оглавления",
         default=False,
         scope=Scope.settings,
     )
     enable_fullscreen_button = Boolean(
-        display_name=_("Show Fullscreen Button"),
-        help=_("Select True to show fullscreen button in the SCORM content"),
+        display_name="Показать кнопку полноэкранного режима",
+        help="Выберите Истина, чтобы показать кнопку полноэкранного режима в содержимом SCORM",
         default=True,
         scope=Scope.settings,
     )
@@ -137,10 +128,8 @@ class ScormXBlock(XBlock, CompletableXBlockMixin):
     navigation_menu = String(scope=Scope.settings, default="")
 
     navigation_menu_width = Integer(
-        display_name=_("Display width of navigation menu(px)"),
-        help=_(
-            "Width of navigation menu. This assumes that Navigation Menu is enabled. (default: 30%)"
-        ),
+        display_name="Ширина отображения меню навигации (пиксели)",
+        help="Ширина меню навигации. Предполагается, что меню навигации включено. (по умолчанию: 30%)",
         scope=Scope.settings,
     )
 
@@ -160,7 +149,7 @@ class ScormXBlock(XBlock, CompletableXBlockMixin):
     def initialize_student_info(self):
         user_id = self.get_current_user_attr("edx-platform.user_id")
         username = self.get_current_user_attr("edx-platform.username")
-        
+
         self.scorm_data["cmi.core.student_id"] = user_id
         self.scorm_data["cmi.learner_id"] = user_id
         self.scorm_data["cmi.learner_name"] = username
@@ -178,7 +167,7 @@ class ScormXBlock(XBlock, CompletableXBlockMixin):
     def author_view(self, context=None):
         context = context or {}
         if not self.index_page_path:
-            context["message"] = "Click 'Edit' to modify this module and upload a new SCORM package."
+            context["message"] = "Нажмите 'Редактировать' для изменения этого модуля и загрузки нового пакета SCORM."
         context["can_view_student_reports"] = True
         return self.student_view(context=context)
 

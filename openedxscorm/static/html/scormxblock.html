@@ -3,16 +3,16 @@
 <div class="scorm-xblock {% if scorm_xblock.enable_navigation_menu %}navigation-enabled{% endif %}">
   {% if index_page_url %} {% if scorm_xblock.has_score %}
   <p>
-    (<span class="grade">{{ grade|floatformat }}</span>/{{ scorm_xblock.weight|floatformat }} {% trans "points" %})
-    <span class="completion-status">{% trans completion_status %}</span>
+    (<span class="grade">{{ grade|floatformat }}</span>/{{ scorm_xblock.weight|floatformat }} баллы)
+    <span class="completion-status">{{ completion_status }}</span>
   </p>
   {% endif %}
 
   <div class="scorm-content">
             {% if scorm_xblock.enable_fullscreen_button %}
             <div class="fullscreen-controls">
-                <button class="enter-fullscreen">{% trans "Fullscreen" %}</button>
-                <button class="exit-fullscreen">{% trans "Exit fullscreen" %}</button>
+                <button class="enter-fullscreen">Полноэкранный режим</button>
+                <button class="exit-fullscreen">Выйти из полноэкранного режима</button>
             </div>
             {% endif %}
 
@@ -30,7 +30,7 @@
                 <div class="scorm-pane"  style="width: {% if scorm_xblock.width %}{{ scorm_xblock.width }}px{% else %}100%{% endif %}; height: {% if scorm_xblock.height %}{{ scorm_xblock.height }}px{% else %}450{% endif %};">
             <div class="popup-wrapper">
                 <button class="popup-launcher">
-                    {% trans "Launch unit in new window" %}
+                    Открыть модуль в новом окне
                     <span class="icon fa fa-external-link"></span>
                 </button>
             </div>
@@ -48,7 +48,7 @@
     {% endif %} {% if can_view_student_reports %}
     <div class="scorm-reports">
       <button class="view-reports reports-togglable">
-        {% trans "View SCORM reports" %}
+        Просмотреть отчёты SCORM
       </button>
       <span class="reports-togglable reports-togglable-off">
         <input
